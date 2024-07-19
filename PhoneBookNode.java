@@ -98,5 +98,12 @@ public class PhoneBookNode {
     this.next = next;
   }
 
-
+  public String toString() {
+    String buffer = "%n    ";
+    return String.format("%s%s: %s%s%s: %s%s%s: %s%s%s: %s%s%s: %s%s%s: %s%s%s: %d",
+                          buffer, "First Name", fName, buffer, "Last Name", lName,
+                          buffer, "Email", email, buffer, "Phone Number", phoneNumber,
+                          buffer, "Street Address", steetAddress, buffer, "City",
+                          city, buffer, "Zip", zip);
+  }
 }
