@@ -22,7 +22,6 @@ public class PhoneBookManager {
     }
 
     current.setNext(newNode);
-
   }
 
   public void add(int index, String fName, String lName, String phoneNumber,
@@ -75,5 +74,21 @@ public class PhoneBookManager {
     current.setNext(removedNode.getNext());
 
     return removedNode;
+  }
+
+  public String toString() {
+    String currentString = "";
+    PhoneBookNode currentNode = headNode;
+
+    while (headNode != null) {
+      currentString += currentNode.toString() + "%n";
+
+      if (currentNode.getNext() == null) {
+        return currentString;
+      }
+      currentNode = currentNode.getNext();
+    }
+
+    return currentString;
   }
 }
