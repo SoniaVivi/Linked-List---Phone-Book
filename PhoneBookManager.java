@@ -76,6 +76,50 @@ public class PhoneBookManager {
     return removedNode;
   }
 
+  public String find(String attributeName, String attributeValue) {
+    if (headNode == null) {
+      return "";
+    }
+
+    if (!headNode.hasDataAttribute(attributeName) && !attributeName.equals("zip")) {
+      return "";
+    }
+
+    PhoneBookNode current = headNode;
+    while (current.getNext() != null) {
+      if (checkNodeValue(current, attributeName, attributeValue)) {
+        return current.toString();
+      }
+
+      current = current.getNext();
+    }
+
+    if (checkNodeValue(current, attributeName, attributeValue)) {
+      return current.toString();
+    }
+
+    return "";
+  }
+
+  public String findIndex(int index) {
+    if (headNode == null) {
+      return "";
+    }
+
+    int i = 0;
+    PhoneBookNode current = headNode;
+    while (i != index && current.getNext() != null) {
+      current = current.getNext();
+      i += 1;
+    }
+
+    if (i != index) {
+      return "";
+    } else {
+      return current.toString();
+    }
+  }
+
   public String toString() {
     String currentString = "";
     PhoneBookNode currentNode = headNode;
@@ -90,5 +134,12 @@ public class PhoneBookManager {
     }
 
     return currentString;
+  }
+
+  private boolean checkNodeValue(PhoneBookNode node, String key, String value) {
+    if (key == "zip") {
+      return Integer.parseInt(value) == node.getZip();
+    }
+    return node.getDataAttribute(key).equals(value);
   }
 }

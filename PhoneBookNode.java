@@ -59,6 +59,10 @@ public class PhoneBookNode {
     }
   }
 
+  public boolean hasDataAttribute(String key) {
+    return this.data.containsKey(key);
+  }
+
   public String toString() {
     String buffer = "%n    ";
     return String.format("%s%s: %s%s%s: %s%s%s: %s%s%s: %s%s%s: %s%s%s: %s%s%s: %d",

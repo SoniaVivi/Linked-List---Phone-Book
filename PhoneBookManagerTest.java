@@ -35,5 +35,23 @@ public class PhoneBookManagerTest {
     phoneBook.add(1, "Tom", "Smith", "(360) 123-4567", "example.com",
                   "1234 Nowhere Dr.", "Bellingham", 98225);
     System.out.printf(phoneBook.toString());
+    System.out.println("================");
+
+    System.out.printf(phoneBook.find("fName", "John"));
+    System.out.printf(phoneBook.find("fName", "Tom"));
+    System.out.println();
+    System.out.printf(phoneBook.find("lName", "Taylor"));
+    System.out.println();
+    System.out.printf(phoneBook.find("zip", "98225"));
+    System.out.println();
+    System.out.println("================");
+
+    System.out.printf(phoneBook.toString());
+    System.out.println("================");
+    System.out.printf(phoneBook.findIndex(1));
+    System.out.println();
+    System.out.printf(phoneBook.findIndex(2));
+    System.out.println();
+    System.out.printf(phoneBook.findIndex(99999));
   }
 }
