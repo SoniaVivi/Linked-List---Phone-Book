@@ -1,22 +1,20 @@
+import java.util.*;
+
 public class PhoneBookNode {
-  private String fName;
-  private String lName;
-  private String phoneNumber;
-  private String email;
-  private String steetAddress;
-  private String city;
+  private final Map<String, String> data;
   private int zip;
   private PhoneBookNode next;
 
   public PhoneBookNode(String fName, String lName, String email,
                        String phoneNumber, String streetAddress, String city,
                        int zip) {
-    this.fName = fName;
-    this.lName = lName;
-    this.email = email;
-    this.phoneNumber = phoneNumber;
-    this.steetAddress = streetAddress;
-    this.city = city;
+    this.data = new HashMap<String, String>();
+    this.data.put("fName", fName);
+    this.data.put("lName", lName);
+    this.data.put("email", email);
+    this.data.put("phoneNumber", phoneNumber);
+    this.data.put("streetAddress", streetAddress);
+    this.data.put("city", city);
     this.zip = zip;
     this.next = null;
   }
@@ -24,38 +22,15 @@ public class PhoneBookNode {
   public PhoneBookNode(String fName, String lName, String email,
                        String phoneNumber, String streetAddress, String city,
                        int zip, PhoneBookNode next) {
-    this.fName = fName;
-    this.lName = lName;
-    this.email = email;
-    this.phoneNumber = phoneNumber;
-    this.steetAddress = streetAddress;
-    this.city = city;
+    this.data = new HashMap<String, String>();
+    this.data.put("fName", fName);
+    this.data.put("lName", lName);
+    this.data.put("email", email);
+    this.data.put("phoneNumber", phoneNumber);
+    this.data.put("streetAddress", streetAddress);
+    this.data.put("city", city);
     this.zip = zip;
     this.next = next;
-  }
-
-  public String getFName() {
-    return this.fName;
-  }
-
-  public String getLName() {
-    return this.lName;
-  }
-
-  public String getPhoneNumber() {
-    return this.phoneNumber;
-  }
-
-  public String getEmail() {
-    return this.email;
-  }
-
-  public String getStreetAddress() {
-    return this.steetAddress;
-  }
-
-  public String getCity() {
-    return this.city;
   }
 
   public int getZip() {
@@ -66,30 +41,6 @@ public class PhoneBookNode {
     return this.next;
   }
 
-  public void setFName(String fName) {
-    this.fName = fName;
-  }
-
-  public void setLName(String lName) {
-    this.lName = lName;
-  }
-
-  public void setPhoneNumber(String phoneNumber) {
-     this.phoneNumber = phoneNumber;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
-  }
-
-  public void setStreetAddress(String streetAddress) {
-    this.steetAddress = streetAddress;
-  }
-
-  public void setCity(String city) {
-    this.city = city;
-  }
-
   public void setZip(int zip) {
    this.zip = zip;
   }
@@ -98,12 +49,24 @@ public class PhoneBookNode {
     this.next = next;
   }
 
+  public String getDataAttribute(String key) {
+    return this.data.get(key);
+  }
+
+  public void setDataAttribute(String key, String value) {
+    if (this.data.containsKey(key)) {
+      this.data.put(key, value);
+    }
+  }
+
   public String toString() {
     String buffer = "%n    ";
     return String.format("%s%s: %s%s%s: %s%s%s: %s%s%s: %s%s%s: %s%s%s: %s%s%s: %d",
-                          buffer, "First Name", fName, buffer, "Last Name", lName,
-                          buffer, "Email", email, buffer, "Phone Number", phoneNumber,
-                          buffer, "Street Address", steetAddress, buffer, "City",
-                          city, buffer, "Zip", zip);
+                          buffer, "First Name", this.data.get("fName"), buffer,
+                          "Last Name", this.data.get("lName"), buffer, "Email",
+                          this.data.get("email"), buffer, "Phone Number",
+                          this.data.get("phoneNumber"), buffer, "Street Address",
+                          this.data.get("streetAddress"), buffer, "City",
+                          this.data.get("city"), buffer, "Zip", zip);
   }
 }
