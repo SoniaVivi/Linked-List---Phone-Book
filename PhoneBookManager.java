@@ -1,21 +1,23 @@
 public class PhoneBookManager {
-  private PhoneBookNode headNode;
+  private PhoneBookNode head;
+  private int size;
 
   public PhoneBookManager() {
-    this.headNode = null;
+    this.head = null;
+    this.size = 0;
   }
 
   public void add(String fName, String lName, String phoneNumber, String email,
              String streetAddress, String city, int zip) {
-
+    this.size += 1;
     PhoneBookNode newNode = new PhoneBookNode(fName, lName, email, phoneNumber,
                                               streetAddress, city, zip);
-    if (headNode == null) {
-      this.headNode = newNode;
+    if (head == null) {
+      this.head = newNode;
       return;
     }
 
-    PhoneBookNode current = headNode;
+    PhoneBookNode current = head;
 
     while (current.getNext() != null) {
       current = current.getNext();
@@ -26,15 +28,16 @@ public class PhoneBookManager {
 
   public void add(int index, String fName, String lName, String phoneNumber,
                   String email, String streetAddress, String city, int zip) {
+    this.size += 1;
     PhoneBookNode newNode = new PhoneBookNode(fName, lName, email, phoneNumber,
                                 streetAddress, city, zip);
 
-    if (headNode == null) {
-      this.headNode = newNode;
+    if (head == null) {
+      this.head = newNode;
       return;
     }
 
-    PhoneBookNode current = headNode;
+    PhoneBookNode current = head;
     int i = 1;
 
     while (i < index && current.getNext() != null) {
@@ -46,19 +49,20 @@ public class PhoneBookManager {
     current.setNext(newNode);
   }
 
-  public PhoneBookNode remove(int index) {
+  public PhoneBookNode removeAtIndex(int index) {
     if (index == 0) {
-      if (headNode == null) {
+      if (head == null) {
         return null;
       } else {
-        PhoneBookNode removedNode = headNode;
-        headNode = headNode.getNext();
+        this.size -= 1;
+        PhoneBookNode removedNode = head;
+        head = head.getNext();
         return removedNode;
       }
     }
 
     int i = 1;
-    PhoneBookNode current = headNode;
+    PhoneBookNode current = head;
 
     while (i < index && current.getNext() != null) {
       current = current.getNext();
@@ -69,62 +73,99 @@ public class PhoneBookManager {
       return null;
     }
 
+    this.size -= 1;
     PhoneBookNode removedNode = current.getNext();
-
     current.setNext(removedNode.getNext());
 
     return removedNode;
   }
 
-  public String find(String attributeName, String attributeValue) {
-    if (headNode == null) {
-      return "";
+  public PhoneBookNode find(String attributeName, String attributeValue) {
+    if (head == null) {
+      return null;
     }
 
-    if (!headNode.hasDataAttribute(attributeName) && !attributeName.equals("zip")) {
-      return "";
+    if (!head.hasDataAttribute(attributeName) && !attributeName.equals("zip")) {
+      return null;
     }
 
-    PhoneBookNode current = headNode;
+    PhoneBookNode current = head;
     while (current.getNext() != null) {
       if (checkNodeValue(current, attributeName, attributeValue)) {
-        return current.toString();
+        return current;
       }
 
       current = current.getNext();
     }
 
     if (checkNodeValue(current, attributeName, attributeValue)) {
-      return current.toString();
+      return current;
     }
 
-    return "";
+    return null;
   }
 
-  public String findIndex(int index) {
-    if (headNode == null) {
-      return "";
+  public PhoneBookNode getAtIndex(int index) {
+    if (head == null) {
+      return null;
     }
 
     int i = 0;
-    PhoneBookNode current = headNode;
+    PhoneBookNode current = head;
     while (i != index && current.getNext() != null) {
       current = current.getNext();
       i += 1;
     }
 
     if (i != index) {
-      return "";
+      return null;
     } else {
-      return current.toString();
+      return current;
     }
+  }
+
+  public int findIndex(String key, String value) {
+    if (this.head == null) {
+      return -1;
+    }
+
+    int i = 0;
+    PhoneBookNode current = this.head;
+
+    while (current.getNext() != null)  {
+      if (checkNodeValue(current, key, value)) {
+        return i;
+      }
+      current = current.getNext();
+      i += 1;
+    }
+
+    if (checkNodeValue(current, key, value)) {
+      return i;
+    }
+
+    return -1;
+  }
+
+  public PhoneBookNode modifyAtIndex(int index, String key, String value) {
+    if (this.head == null) {
+      return null;
+    }
+
+    PhoneBookNode current = getAtIndex(index);
+    current.setDataAttribute(key, value);
+    return current;
+  }
+
+  public int getSize() {
+    return this.size;
   }
 
   public String toString() {
     String currentString = "";
-    PhoneBookNode currentNode = headNode;
+    PhoneBookNode currentNode = head;
 
-    while (headNode != null) {
+    while (head != null) {
       currentString += currentNode.toString() + "%n";
 
       if (currentNode.getNext() == null) {

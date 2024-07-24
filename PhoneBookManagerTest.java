@@ -3,6 +3,7 @@ public class PhoneBookManagerTest {
     PhoneBookManager phoneBook = new PhoneBookManager();
     phoneBook.add("Tom", "Smith", "(360) 123-4567", "example.com",
                   "1234 Nowhere Dr.", "Bellingham", 98225);
+    System.out.println(phoneBook.getSize());
 
     phoneBook.add("Larry", "Gonzales", "(360) 234-5678", "xample.com",
                   "234 Nowhere Dr.", "Bellingham", 98225);
@@ -15,20 +16,22 @@ public class PhoneBookManagerTest {
 
     phoneBook.add("Catherine", "Dala", "(360) 876-5432", "ple.com",
                   "5632 Nowhere Dr.", "Bellingham", 98225);
+    System.out.println(phoneBook.getSize());
 
     System.out.printf(phoneBook.toString());
     System.out.println("================");
 
-    phoneBook.remove(0);
-    phoneBook.remove(1);
+    phoneBook.removeAtIndex(0);
+    phoneBook.removeAtIndex(1);
+    System.out.println(phoneBook.getSize());
     System.out.printf(phoneBook.toString());
     System.out.println("================");
 
-    phoneBook.remove(2);
+    phoneBook.removeAtIndex(2);
     System.out.printf(phoneBook.toString());
     System.out.println("================");
 
-    phoneBook.remove(2);
+    phoneBook.removeAtIndex(2);
     System.out.printf(phoneBook.toString());
     System.out.println("================");
 
@@ -37,21 +40,24 @@ public class PhoneBookManagerTest {
     System.out.printf(phoneBook.toString());
     System.out.println("================");
 
-    System.out.printf(phoneBook.find("fName", "John"));
-    System.out.printf(phoneBook.find("fName", "Tom"));
+    System.out.printf(phoneBook.find("fName", "Tom").toString());
     System.out.println();
-    System.out.printf(phoneBook.find("lName", "Taylor"));
+    System.out.printf(phoneBook.find("lName", "Taylor").toString());
     System.out.println();
-    System.out.printf(phoneBook.find("zip", "98225"));
+    System.out.printf(phoneBook.find("zip", "98225").toString());
     System.out.println();
     System.out.println("================");
 
     System.out.printf(phoneBook.toString());
     System.out.println("================");
-    System.out.printf(phoneBook.findIndex(1));
+    System.out.printf(phoneBook.getAtIndex(1).toString());
     System.out.println();
-    System.out.printf(phoneBook.findIndex(2));
+    System.out.printf(phoneBook.getAtIndex(2).toString());
     System.out.println();
-    System.out.printf(phoneBook.findIndex(99999));
+    System.out.println("================");
+
+    System.out.printf(phoneBook.modifyAtIndex(0, "fName", "Lalalala").toString());
+    System.out.println();
+    System.out.printf(phoneBook.modifyAtIndex(2, "fName", "Dadada").toString());
   }
 }
