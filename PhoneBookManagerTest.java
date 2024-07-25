@@ -1,3 +1,11 @@
+// Siona Vivian
+// 25/7/24
+// CS 143
+// Lab 5: Phonebook
+/*
+  The program is to create a Phone Book using linked lists.
+*/
+
 public class PhoneBookManagerTest {
   public static void main(String[] args) {
     PhoneBookManager phoneBook = new PhoneBookManager();
