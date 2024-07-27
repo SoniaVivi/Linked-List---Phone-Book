@@ -73,6 +73,7 @@ public class PhoneBookNode {
 
   public String toString() {
     String buffer = "%n    ";
+    // buffer key data, buffer key data, ...., buffer key data
     return String.format("%s%s: %s%s%s: %s%s%s: %s%s%s: %s%s%s: %s%s%s: %s%s%s: %d",
                           buffer, "First Name", this.data.get("fName"), buffer,
                           "Last Name", this.data.get("lName"), buffer, "Email",

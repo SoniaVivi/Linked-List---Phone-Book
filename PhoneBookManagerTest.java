@@ -44,6 +44,8 @@ public class PhoneBookManagerTest {
     System.out.println();
     System.out.println("================");
 
+    System.out.printf(phoneBook.toString());
+    System.out.println("================");
     testModifyAtIndex(phoneBook);
   }
 

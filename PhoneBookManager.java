@@ -27,6 +27,7 @@ public class PhoneBookManager {
 
     PhoneBookNode current = head;
 
+    // Iterate to end of list
     while (current.getNext() != null) {
       current = current.getNext();
     }
@@ -48,6 +49,7 @@ public class PhoneBookManager {
     PhoneBookNode current = head;
     int i = 1;
 
+    // Iterate to index
     while (i < index && current.getNext() != null) {
       current = current.getNext();
       i += 1;
@@ -59,14 +61,12 @@ public class PhoneBookManager {
 
   public PhoneBookNode removeAtIndex(int index) {
     if (index == 0) {
-      if (head == null) {
-        return null;
-      } else {
-        this.size -= 1;
-        PhoneBookNode removedNode = head;
-        head = head.getNext();
-        return removedNode;
-      }
+      return remove();
+    }
+
+    // Return early if index is greater than number of nodes
+    if (index >= this.size) {
+      return null;
     }
 
     int i = 1;
@@ -77,15 +77,22 @@ public class PhoneBookManager {
       i += 1;
     }
 
-    if (current.getNext() == null) {
-      return null;
-    }
-
     this.size -= 1;
     PhoneBookNode removedNode = current.getNext();
     current.setNext(removedNode.getNext());
 
     return removedNode;
+  }
+
+  public PhoneBookNode remove() {
+    if (head == null) {
+      return null;
+    } else {
+      this.size -= 1;
+      PhoneBookNode removedNode = head;
+      head = head.getNext();
+      return removedNode;
+    }
   }
 
   public PhoneBookNode find(String attributeName, String attributeValue) {
@@ -98,6 +105,8 @@ public class PhoneBookManager {
     }
 
     PhoneBookNode current = head;
+
+    // Continue down list until value matches
     while (current.getNext() != null) {
       if (checkNodeValue(current, attributeName, attributeValue)) {
         return current;
@@ -106,6 +115,7 @@ public class PhoneBookManager {
       current = current.getNext();
     }
 
+    // Needed as above loop terminates early
     if (checkNodeValue(current, attributeName, attributeValue)) {
       return current;
     }
@@ -120,11 +130,14 @@ public class PhoneBookManager {
 
     int i = 0;
     PhoneBookNode current = head;
+
+    // Loop until index
     while (i != index && current.getNext() != null) {
       current = current.getNext();
       i += 1;
     }
 
+    // Needed to see if above loop terminated early
     if (i != index) {
       return null;
     } else {
@@ -140,14 +153,17 @@ public class PhoneBookManager {
     int i = 0;
     PhoneBookNode current = this.head;
 
+    // Continue down the list until value matches
     while (current.getNext() != null)  {
       if (checkNodeValue(current, key, value)) {
         return i;
       }
+
       current = current.getNext();
       i += 1;
     }
 
+    // Needed as the while loop does not check if the last node matches
     if (checkNodeValue(current, key, value)) {
       return i;
     }
