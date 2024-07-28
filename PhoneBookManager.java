@@ -5,6 +5,16 @@
 /*
   The program is to create a Phone Book using linked lists.
 */
+// ============= EXTRA CREDIT ===============
+//               Created PhoneBookManager.sort()
+// Sources: https://docs.oracle.com/javase/8/docs/api/java/util/Collections.html
+//          https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html
+//          https://stackoverflow.com/questions/6203411/comparing-strings-by-their-alphabetical-order
+//          https://www.w3schools.com/java/ref_string_compareto.asp
+//          https://en.wikipedia.org/wiki/Gnome_sort
+
+
+import java.util.*;
 
 public class PhoneBookManager {
   private PhoneBookNode head;
@@ -199,6 +209,60 @@ public class PhoneBookManager {
     }
 
     return currentString;
+  }
+
+  public void sortByDataAttribute(String dataAttribute) {
+    ArrayList<PhoneBookNode> list = toArrayList();
+    int index = 0;
+
+    while (index < list.size()) {
+      // Increase index and continue as there is nothing to compare
+      if (index == 0) {
+        index += 1;
+        continue;
+      }
+
+      // Get strings of the data attributes of the nodes at current and prev index
+      String currentString = list.get(index).getDataAttribute(dataAttribute);
+      String prevString = list.get(index - 1).getDataAttribute(dataAttribute);
+
+      // If current is greater then prev, continue
+      if (currentString.compareToIgnoreCase(prevString) >= 1) {
+        index += 1;
+      } else {
+        // If current is smaller, swap the prev and current then decrement index
+        // The index will "follow" the smaller until it is in its right position,
+        // not smaller than the previous, or is at 0.
+        Collections.swap(list, index, index - 1);
+        index -= 1;
+      }
+    }
+
+    // Set head to the first node in list then set the next links of each node
+    this.head = list.get(0);
+    PhoneBookNode prev = this.head;
+    for (PhoneBookNode node : list.subList(1, list.size())) {
+      prev.setNext(node);
+      prev = node;
+    }
+
+    prev.setNext(null);
+  }
+
+  private ArrayList<PhoneBookNode> toArrayList() {
+    ArrayList<PhoneBookNode> temp = new ArrayList<PhoneBookNode>();
+    PhoneBookNode current = this.head;
+
+    while (current.getNext() != null) {
+      temp.add(current);
+      current = current.getNext();
+    }
+
+    if (current != null) {
+      temp.add (current);
+    }
+
+    return temp;
   }
 
   private boolean checkNodeValue(PhoneBookNode node, String key, String value) {

@@ -5,6 +5,14 @@
 /*
   The program is to create a Phone Book using linked lists.
 */
+// ============= EXTRA CREDIT ===============
+//               Created PhoneBookManager.sort()
+// Sources: https://docs.oracle.com/javase/8/docs/api/java/util/Collections.html
+//          https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html
+//          https://stackoverflow.com/questions/6203411/comparing-strings-by-their-alphabetical-order
+//          https://www.w3schools.com/java/ref_string_compareto.asp
+//          https://en.wikipedia.org/wiki/Gnome_sort
+
 
 import java.util.*;
 
